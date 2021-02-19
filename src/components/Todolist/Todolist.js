@@ -1,14 +1,20 @@
 import { useStore } from '../../store/use-store';
 
 import TodoItem from '../TodoItem';
+import { useStyles } from './Todolist.style';
 
 function Todolist() {
-  const { todolist } = useStore();
+  const classes = useStyles();
+  const { handleTodoCheckedChange, todolist } = useStore();
 
   return (
-    <div>
+    <div className={classes.todolistContainer}>
       {todolist.map(item => (
-        <TodoItem item={item} key={item.id} />
+        <TodoItem
+          handleTodoCheckedChange={handleTodoCheckedChange}
+          item={item}
+          key={item.id}
+        />
       ))}
     </div>
   );
