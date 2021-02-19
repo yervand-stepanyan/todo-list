@@ -24,7 +24,7 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     boxSizing: 'border-box',
-    height: theme.size.todoItemHeight,
+    minHeight: theme.size.todoItemHeight,
     paddingLeft: '12px',
   },
   iconsContainer: {
