@@ -45,6 +45,12 @@ function TodoItem({ handleTodoCheckedChange, item }) {
     }
   };
 
+  const handleSubmitOnBlur = event => {
+    event.preventDefault();
+
+    handleSubmit(id);
+  };
+
   const handleRemove = itemId => {
     handleTodoRemove(itemId);
   };
@@ -59,6 +65,7 @@ function TodoItem({ handleTodoCheckedChange, item }) {
               className={classes.textField}
               fullWidth
               id="outlined-full-width"
+              onBlur={e => handleSubmitOnBlur(e)}
               onChange={e => handleInputChange(e)}
               onKeyDown={e => handleSubmitOnEnter(e, id)}
               placeholder={INPUT.placeholder}
