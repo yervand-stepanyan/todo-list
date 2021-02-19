@@ -27,6 +27,10 @@ export const useStyles = makeStyles(theme => ({
     minHeight: theme.size.todoItemHeight,
     paddingLeft: '12px',
   },
+  checkedDescription: {
+    color: theme.color.checkedDescriptionColor,
+    textDecoration: 'line-through',
+  },
   iconsContainer: {
     display: 'flex',
   },

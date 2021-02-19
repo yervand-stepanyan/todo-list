@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
 import Input from '../../components/Input';
+import removeSpaces from '../../helpers/removeSpaces';
 import StoreContext from '../../store/context';
 import Title from '../../components/Title';
 import { TITLE } from '../../globals/constants';
@@ -16,8 +17,10 @@ function Main() {
   const [todolist, setTodolist] = useState([]);
 
   const handleAddTodo = description => {
+    const normalizedDescription = removeSpaces(description);
+
     const newTodo = {
-      description,
+      description: normalizedDescription,
       done: false,
       id: uuid(),
     };
@@ -39,11 +42,13 @@ function Main() {
   };
 
   const handleTodoEdit = ({ description, id }) => {
+    const normalizedDescription = removeSpaces(description);
+
     const updatedTodolist = todolist.map(todo =>
       todo.id === id
         ? {
             ...todo,
-            description,
+            description: normalizedDescription,
           }
         : todo
     );
@@ -74,12 +79,8 @@ function Main() {
                 todolist,
               }}
             >
-              <div>
-                <Input />
-              </div>
-              <div>
-                <Todolist />
-              </div>
+              <Input />
+              <Todolist />
             </StoreContext.Provider>
           </CardContent>
         </Card>

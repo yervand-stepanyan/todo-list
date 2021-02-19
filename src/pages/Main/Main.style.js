@@ -17,10 +17,10 @@ export const useStyles = makeStyles(theme => ({
     marginBottom: theme.customSpacing.base,
   },
   contentContainer: {
-    height: '80vh',
+    maxHeight: '80vh',
     width: '100%',
     '@media only screen and (min-width: 600px)': {
-      height: '75vh',
+      maxHeight: '75vh',
       width: '60%',
     },
   },

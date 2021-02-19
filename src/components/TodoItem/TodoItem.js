@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import CheckIcon from '@material-ui/icons/Check';
@@ -7,6 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
 import GreenCheckbox from '../GreenCheckbox';
 import { INPUT } from '../../globals/constants';
@@ -19,6 +20,10 @@ function TodoItem({ handleTodoCheckedChange, item }) {
   const [isEdit, setIsEdit] = useState(false);
   const [value, setValue] = useState(description || '');
   const { handleTodoEdit, handleTodoRemove } = useStore();
+
+  useEffect(() => {
+    setValue(description);
+  }, [isEdit]);
 
   const handleEdit = () => {
     setIsEdit(true);
@@ -50,6 +55,7 @@ function TodoItem({ handleTodoCheckedChange, item }) {
         <div className={classes.editItemWrapper}>
           <div className={classes.textFieldWrapper}>
             <TextField
+              autoFocus
               className={classes.textField}
               fullWidth
               id="outlined-full-width"
@@ -81,7 +87,14 @@ function TodoItem({ handleTodoCheckedChange, item }) {
                   onChange={() => handleTodoCheckedChange(id)}
                 />
               }
-              label={description}
+              label={
+                <Typography
+                  className={`${done ? classes.checkedDescription : null}`}
+                  variant="body1"
+                >
+                  {description}
+                </Typography>
+              }
             />
           </div>
           <div className={classes.iconsContainer}>
