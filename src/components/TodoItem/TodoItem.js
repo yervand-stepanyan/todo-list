@@ -18,7 +18,7 @@ function TodoItem({ handleTodoCheckedChange, item }) {
   const classes = useStyles();
   const { description, done, id } = item;
   const [isEdit, setIsEdit] = useState(false);
-  const [value, setValue] = useState(description || '');
+  const [value, setValue] = useState('');
   const { handleTodoEdit, handleTodoRemove } = useStore();
 
   useEffect(() => {
@@ -34,9 +34,11 @@ function TodoItem({ handleTodoCheckedChange, item }) {
   };
 
   const handleSubmit = itemId => {
-    handleTodoEdit({ description: value, id: itemId });
+    if (value) {
+      handleTodoEdit({ description: value, id: itemId });
 
-    setIsEdit(false);
+      setIsEdit(false);
+    }
   };
 
   const handleSubmitOnEnter = event => {
@@ -63,12 +65,13 @@ function TodoItem({ handleTodoCheckedChange, item }) {
             <TextField
               autoFocus
               className={classes.textField}
+              error={!value}
               fullWidth
               id="outlined-full-width"
               onBlur={e => handleSubmitOnBlur(e)}
               onChange={e => handleInputChange(e)}
               onKeyDown={e => handleSubmitOnEnter(e, id)}
-              placeholder={INPUT.placeholder}
+              placeholder={INPUT.editInputPlaceholder}
               value={value}
               variant="outlined"
             />
@@ -77,6 +80,7 @@ function TodoItem({ handleTodoCheckedChange, item }) {
             <IconButton
               aria-label="submit edit"
               color="primary"
+              disabled={!value}
               onClick={() => handleSubmit(id)}
             >
               <CheckIcon />
