@@ -4,19 +4,21 @@ import uuid from 'react-uuid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
+import { BUTTON_LABEL, TITLE } from '../../globals/constants';
+import Filters from '../../components/Filters';
 import Input from '../../components/Input';
 import removeSpaces from '../../helpers/removeSpaces';
 import StoreContext from '../../store/context';
 import Title from '../../components/Title';
-import { TITLE } from '../../globals/constants';
 import Todolist from '../../components/Todolist';
 import { useStyles } from './Main.style';
 
 function Main() {
   const classes = useStyles();
+  const [selectedFilter, setSelectedFilter] = useState(BUTTON_LABEL.filters[0]);
   const [todolist, setTodolist] = useState([]);
 
-  const handleAddTodo = description => {
+  const handleTodoAdd = description => {
     const normalizedDescription = removeSpaces(description);
 
     const newTodo = {
@@ -62,6 +64,16 @@ function Main() {
     setTodolist(filteredTodolist);
   };
 
+  const handleFilterSelect = text => {
+    setSelectedFilter(text);
+  };
+
+  const handleClearAllCompleted = () => {
+    const filteredTodolist = todolist.filter(todo => !todo.done);
+
+    setTodolist(filteredTodolist);
+  };
+
   return (
     <div className={classes.mainContainer}>
       <div className={classes.titleContainer}>
@@ -72,15 +84,19 @@ function Main() {
           <CardContent>
             <StoreContext.Provider
               value={{
-                handleAddTodo,
+                handleClearAllCompleted,
+                handleFilterSelect,
+                handleTodoAdd,
                 handleTodoCheckedChange,
                 handleTodoEdit,
                 handleTodoRemove,
+                selectedFilter,
                 todolist,
               }}
             >
               <Input />
               <Todolist />
+              <Filters />
             </StoreContext.Provider>
           </CardContent>
         </Card>

@@ -1,15 +1,33 @@
-import { useStore } from '../../store/use-store';
+import { useEffect, useState } from 'react';
 
+import { BUTTON_LABEL } from '../../globals/constants';
 import TodoItem from '../TodoItem';
+import { useStore } from '../../store/use-store';
 import { useStyles } from './Todolist.style';
 
 function Todolist() {
   const classes = useStyles();
-  const { handleTodoCheckedChange, todolist } = useStore();
+  const { filters } = BUTTON_LABEL;
+  const { handleTodoCheckedChange, selectedFilter, todolist } = useStore();
+  const [todolistToShow, setTodolistToShow] = useState([]);
+
+  useEffect(() => {
+    if (selectedFilter === filters[1]) {
+      const filteredTodolist = todolist.filter(todo => !todo.done);
+
+      setTodolistToShow(filteredTodolist);
+    } else if (selectedFilter === filters[2]) {
+      const filteredTodolist = todolist.filter(todo => todo.done);
+
+      setTodolistToShow(filteredTodolist);
+    } else {
+      setTodolistToShow(todolist);
+    }
+  }, [selectedFilter, todolist]);
 
   return (
     <div className={classes.todolistContainer}>
-      {todolist.map(item => (
+      {todolistToShow.map(item => (
         <TodoItem
           handleTodoCheckedChange={handleTodoCheckedChange}
           item={item}
