@@ -25,6 +25,19 @@ function Main() {
     setTodolist([...todolist, newTodo]);
   };
 
+  const handleTodoCheckedChange = id => {
+    const updatedTodolist = todolist.map(todo =>
+      todo.id === id
+        ? {
+            ...todo,
+            done: !todo.done,
+          }
+        : todo
+    );
+
+    setTodolist(updatedTodolist);
+  };
+
   return (
     <div className={classes.mainContainer}>
       <div className={classes.titleContainer}>
@@ -36,6 +49,7 @@ function Main() {
             <StoreContext.Provider
               value={{
                 handleAddTodo,
+                handleTodoCheckedChange,
                 todolist,
               }}
             >
