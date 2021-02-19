@@ -1,28 +1,16 @@
 import PropTypes from 'prop-types';
 
-import Checkbox from '@material-ui/core/Checkbox';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { green } from '@material-ui/core/colors';
 import IconButton from '@material-ui/core/IconButton';
-import { withStyles } from '@material-ui/core/styles';
 
+import GreenCheckbox from '../GreenCheckbox';
 import { useStyles } from './TodoItem.style';
 
 function TodoItem({ handleTodoCheckedChange, item }) {
   const classes = useStyles();
   const { description, done, id } = item;
-
-  const GreenCheckbox = withStyles({
-    root: {
-      color: green[400],
-      '&$checked': {
-        color: green[600],
-      },
-    },
-    checked: {},
-  })(props => <Checkbox color="default" {...props} />);
 
   return (
     <div className={classes.todoItemContainer}>
