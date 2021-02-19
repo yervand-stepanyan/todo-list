@@ -38,6 +38,25 @@ function Main() {
     setTodolist(updatedTodolist);
   };
 
+  const handleTodoEdit = ({ description, id }) => {
+    const updatedTodolist = todolist.map(todo =>
+      todo.id === id
+        ? {
+            ...todo,
+            description,
+          }
+        : todo
+    );
+
+    setTodolist(updatedTodolist);
+  };
+
+  const handleTodoRemove = id => {
+    const filteredTodolist = todolist.filter(todo => todo.id !== id);
+
+    setTodolist(filteredTodolist);
+  };
+
   return (
     <div className={classes.mainContainer}>
       <div className={classes.titleContainer}>
@@ -50,6 +69,8 @@ function Main() {
               value={{
                 handleAddTodo,
                 handleTodoCheckedChange,
+                handleTodoEdit,
+                handleTodoRemove,
                 todolist,
               }}
             >

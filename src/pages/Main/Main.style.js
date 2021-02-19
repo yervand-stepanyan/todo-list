@@ -8,7 +8,10 @@ export const useStyles = makeStyles(theme => ({
     backgroundColor: theme.color.mainBackgroundColor,
     boxSizing: 'border-box',
     minHeight: '100vh',
-    padding: theme.customSpacing.base,
+    padding: theme.customSpacing.small,
+    '@media only screen and (min-width: 600px)': {
+      padding: theme.customSpacing.base,
+    },
   },
   titleContainer: {
     marginBottom: theme.customSpacing.base,
