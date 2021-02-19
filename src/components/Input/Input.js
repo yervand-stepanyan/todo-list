@@ -10,7 +10,7 @@ import { useStyles } from './Input.style';
 function Input() {
   const classes = useStyles();
   const [value, setValue] = useState('');
-  const { handleAddTodo } = useStore();
+  const { handleTodoAdd } = useStore();
 
   const handleInputChange = event => {
     setValue(event.target.value);
@@ -18,7 +18,7 @@ function Input() {
 
   const handleSubmit = () => {
     if (value) {
-      handleAddTodo(value);
+      handleTodoAdd(value);
 
       setValue('');
     }
@@ -39,7 +39,7 @@ function Input() {
           id="outlined-full-width"
           onChange={e => handleInputChange(e)}
           onKeyDown={e => handleSubmitOnEnter(e)}
-          placeholder={INPUT.placeholder}
+          placeholder={INPUT.mainInputPlaceholder}
           value={value}
           variant="outlined"
         />
