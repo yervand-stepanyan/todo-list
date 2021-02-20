@@ -54,7 +54,7 @@ function Filters() {
         ))}
       </div>
       <div
-        className={`${
+        className={`${classes.clearCompletedContainer} ${
           hideClearCompleted ? '' : classes.hideClearCompletedWrapper
         }`}
       >

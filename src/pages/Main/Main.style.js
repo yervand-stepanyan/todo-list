@@ -8,19 +8,24 @@ export const useStyles = makeStyles(theme => ({
     backgroundColor: theme.color.mainBackgroundColor,
     boxSizing: 'border-box',
     minHeight: '100vh',
-    padding: theme.customSpacing.small,
+    padding: `${theme.customSpacing.small} ${theme.customSpacing.small} ${theme.customSpacing.large}`,
     '@media only screen and (min-width: 600px)': {
-      padding: theme.customSpacing.base,
+      padding: `${theme.customSpacing.small} ${theme.customSpacing.base} ${theme.customSpacing.large}`,
     },
   },
-  titleContainer: {
-    marginBottom: theme.customSpacing.base,
-  },
   contentContainer: {
-    maxHeight: '80vh',
+    marginTop: theme.customSpacing.base,
     width: '100%',
     '@media only screen and (min-width: 600px)': {
-      maxHeight: '75vh',
+      width: '90%',
+    },
+    '@media only screen and (min-width: 768px)': {
+      width: '80%',
+    },
+    '@media only screen and (min-width: 992px)': {
+      width: '70%',
+    },
+    '@media only screen and (min-width: 1200px)': {
       width: '60%',
     },
   },

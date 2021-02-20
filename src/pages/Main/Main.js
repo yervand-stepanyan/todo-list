@@ -76,7 +76,7 @@ function Main() {
 
   return (
     <div className={classes.mainContainer}>
-      <div className={classes.titleContainer}>
+      <div>
         <Title text={TITLE} />
       </div>
       <div className={classes.contentContainer}>
