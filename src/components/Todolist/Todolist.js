@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { BUTTON_ITEM } from '../../globals/constants';
+import { FILTER_BUTTON_ITEM } from '../../globals/constants';
 import TodoItem from '../TodoItem';
 import { useStore } from '../../store/use-store';
 import { useStyles } from './Todolist.style';
@@ -11,11 +11,11 @@ function Todolist() {
   const [todolistToShow, setTodolistToShow] = useState([]);
 
   useEffect(() => {
-    if (selectedFilter === BUTTON_ITEM.active.value) {
+    if (selectedFilter === FILTER_BUTTON_ITEM.active.value) {
       const filteredTodolist = todolist.filter(todo => !todo.done);
 
       setTodolistToShow(filteredTodolist);
-    } else if (selectedFilter === BUTTON_ITEM.completed.value) {
+    } else if (selectedFilter === FILTER_BUTTON_ITEM.completed.value) {
       const filteredTodolist = todolist.filter(todo => todo.done);
 
       setTodolistToShow(filteredTodolist);

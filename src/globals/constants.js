@@ -1,4 +1,4 @@
-export const BUTTON_ITEM = {
+export const FILTER_BUTTON_ITEM = {
   all: {
     label: 'All',
     value: 'all',

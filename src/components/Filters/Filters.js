@@ -1,13 +1,17 @@
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import { BUTTON_ITEM, BUTTON_LABEL, LABEL } from '../../globals/constants';
+import {
+  BUTTON_LABEL,
+  FILTER_BUTTON_ITEM,
+  LABEL,
+} from '../../globals/constants';
 import { useStore } from '../../store/use-store';
 import { useStyles } from './Filters.style';
 
 function Filters() {
   const classes = useStyles();
-  const buttonItems = Object.values(BUTTON_ITEM);
+  const filterButtonItems = Object.values(FILTER_BUTTON_ITEM);
   const {
     handleClearAllCompleted,
     handleFilterSelect,
@@ -42,7 +46,7 @@ function Filters() {
         </div>
       </div>
       <div className={classes.buttonGroupContainer}>
-        {buttonItems.map(({ label, value }) => (
+        {filterButtonItems.map(({ label, value }) => (
           <div key={value}>
             <Button
               color={value === selectedFilter ? 'secondary' : 'primary'}
