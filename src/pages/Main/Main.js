@@ -4,7 +4,7 @@ import uuid from 'react-uuid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-import { BUTTON_LABEL, TITLE } from '../../globals/constants';
+import { BUTTON_ITEM, TITLE } from '../../globals/constants';
 import Filters from '../../components/Filters';
 import Input from '../../components/Input';
 import removeSpaces from '../../helpers/removeSpaces';
@@ -15,7 +15,7 @@ import { useStyles } from './Main.style';
 
 function Main() {
   const classes = useStyles();
-  const [selectedFilter, setSelectedFilter] = useState(BUTTON_LABEL.filters[0]);
+  const [selectedFilter, setSelectedFilter] = useState(BUTTON_ITEM.all.value);
   const [todolist, setTodolist] = useState([]);
 
   const handleTodoAdd = description => {
