@@ -1,6 +1,19 @@
+export const BUTTON_ITEM = {
+  all: {
+    label: 'All',
+    value: 'all',
+  },
+  active: {
+    label: 'Active',
+    value: 'active',
+  },
+  completed: {
+    label: 'Completed',
+    value: 'completed',
+  },
+};
 export const BUTTON_LABEL = {
   add: 'Add',
-  filters: ['All', 'Active', 'Completed'],
   clearCompleted: 'Clear completed',
 };
 export const INPUT = {
