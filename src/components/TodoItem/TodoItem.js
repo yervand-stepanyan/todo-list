@@ -1,25 +1,19 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import CheckIcon from '@material-ui/icons/Check';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-
-import GreenCheckbox from '../GreenCheckbox';
-import { INPUT } from '../../globals/constants';
+import TodoItemEdit from '../TodoItemEdit';
+import TodoItemView from '../TodoItemView';
 import { useStore } from '../../store/use-store';
-import { useStyles } from './TodoItem.style';
 
-function TodoItem({ handleTodoCheckedChange, item }) {
-  const classes = useStyles();
+function TodoItem({ item }) {
   const { description, done, id } = item;
   const [isEdit, setIsEdit] = useState(false);
   const [value, setValue] = useState('');
-  const { handleTodoEdit, handleTodoRemove } = useStore();
+  const {
+    handleTodoCheckedChange,
+    handleTodoEdit,
+    handleTodoRemove,
+  } = useStore();
 
   useEffect(() => {
     setValue(description);
@@ -60,82 +54,30 @@ function TodoItem({ handleTodoCheckedChange, item }) {
   return (
     <div>
       {isEdit ? (
-        <div className={classes.editItemWrapper}>
-          <div className={classes.textFieldWrapper}>
-            <TextField
-              autoFocus
-              className={classes.textField}
-              error={!value}
-              fullWidth
-              id="outlined-full-width"
-              onBlur={e => handleSubmitOnBlur(e)}
-              onChange={e => handleInputChange(e)}
-              onKeyDown={e => handleSubmitOnEnter(e, id)}
-              placeholder={INPUT.editInputPlaceholder}
-              value={value}
-              variant="outlined"
-            />
-          </div>
-          <div className={classes.submitIconWrapper}>
-            <IconButton
-              aria-label="submit edit"
-              color="primary"
-              disabled={!value}
-              onClick={() => handleSubmit(id)}
-            >
-              <CheckIcon />
-            </IconButton>
-          </div>
-        </div>
+        <TodoItemEdit
+          handleInputChange={handleInputChange}
+          handleSubmitOnEnter={handleSubmitOnEnter}
+          handleSubmitOnBlur={handleSubmitOnBlur}
+          handleSubmit={handleSubmit}
+          id={id}
+          isError={!value}
+          value={value}
+        />
       ) : (
-        <div className={classes.itemWrapper}>
-          <div>
-            <FormControlLabel
-              control={
-                <GreenCheckbox
-                  checked={done}
-                  name="checkedG"
-                  onChange={() => handleTodoCheckedChange(id)}
-                />
-              }
-              label={
-                <Typography
-                  className={`${done ? classes.checkedDescription : null}`}
-                  variant="body1"
-                >
-                  {description}
-                </Typography>
-              }
-            />
-          </div>
-          <div className={classes.iconsContainer}>
-            <div>
-              <IconButton
-                aria-label="edit an item"
-                color="primary"
-                onClick={handleEdit}
-              >
-                <EditIcon />
-              </IconButton>
-            </div>
-            <div>
-              <IconButton
-                aria-label="delete an item"
-                color="secondary"
-                onClick={() => handleRemove(id)}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </div>
-          </div>
-        </div>
+        <TodoItemView
+          description={description}
+          done={done}
+          handleEdit={handleEdit}
+          handleRemove={handleRemove}
+          handleTodoCheckedChange={handleTodoCheckedChange}
+          id={id}
+        />
       )}
     </div>
   );
 }
 
 TodoItem.propTypes = {
-  handleTodoCheckedChange: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
 };
 

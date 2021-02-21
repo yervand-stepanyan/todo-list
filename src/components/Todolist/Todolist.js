@@ -8,7 +8,7 @@ import { useStyles } from './Todolist.style';
 function Todolist() {
   const classes = useStyles();
   const { filters } = BUTTON_LABEL;
-  const { handleTodoCheckedChange, selectedFilter, todolist } = useStore();
+  const { selectedFilter, todolist } = useStore();
   const [todolistToShow, setTodolistToShow] = useState([]);
 
   useEffect(() => {
@@ -28,11 +28,7 @@ function Todolist() {
   return (
     <div className={classes.todolistContainer}>
       {todolistToShow.map(item => (
-        <TodoItem
-          handleTodoCheckedChange={handleTodoCheckedChange}
-          item={item}
-          key={item.id}
-        />
+        <TodoItem item={item} key={item.id} />
       ))}
     </div>
   );
