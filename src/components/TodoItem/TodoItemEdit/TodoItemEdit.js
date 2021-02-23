@@ -1,22 +1,46 @@
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import CheckIcon from '@material-ui/icons/Check';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 
-import { INPUT } from '../../globals/constants';
+import { INPUT } from '../../../globals/constants';
 import { useStyles } from './TodoItemEdit.style';
 
-function TodoItemEdit({
-  handleInputChange,
-  handleSubmit,
-  handleSubmitOnBlur,
-  handleSubmitOnEnter,
-  id,
-  isError,
-  value,
-}) {
+function TodoItemEdit({ description, handleEdit, handleTodoEdit, id }) {
   const classes = useStyles();
+  const [value, setValue] = useState('');
+
+  useEffect(() => {
+    setValue(description);
+  }, []);
+
+  const handleInputChange = event => {
+    setValue(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (value) {
+      const editedDescription = { description: value, id };
+
+      handleTodoEdit(editedDescription);
+
+      handleEdit(false);
+    }
+  };
+
+  const handleSubmitOnEnter = event => {
+    if (event.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
+  const handleSubmitOnBlur = event => {
+    event.preventDefault();
+
+    handleSubmit();
+  };
 
   return (
     <div className={classes.todoItemEditContainer}>
@@ -24,7 +48,7 @@ function TodoItemEdit({
         <TextField
           autoFocus
           className={classes.textField}
-          error={isError}
+          error={!value}
           fullWidth
           id="outlined-full-width"
           onBlur={e => handleSubmitOnBlur(e)}
@@ -39,8 +63,8 @@ function TodoItemEdit({
         <IconButton
           aria-label="submit edit"
           color="primary"
-          disabled={isError}
-          onClick={() => handleSubmit(id)}
+          disabled={!value}
+          onClick={handleSubmit}
         >
           <CheckIcon />
         </IconButton>
@@ -50,13 +74,10 @@ function TodoItemEdit({
 }
 
 TodoItemEdit.propTypes = {
-  handleInputChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  handleSubmitOnBlur: PropTypes.func.isRequired,
-  handleSubmitOnEnter: PropTypes.func.isRequired,
+  description: PropTypes.string.isRequired,
+  handleEdit: PropTypes.func.isRequired,
+  handleTodoEdit: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
-  isError: PropTypes.bool.isRequired,
-  value: PropTypes.string.isRequired,
 };
 
 export default TodoItemEdit;

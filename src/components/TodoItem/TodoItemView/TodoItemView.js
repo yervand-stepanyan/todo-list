@@ -19,6 +19,17 @@ function TodoItemView({
 }) {
   const classes = useStyles();
 
+  const handleCheckboxChange = () => {
+    handleTodoCheckedChange(id);
+  };
+  const handleEditClick = () => {
+    handleEdit(true);
+  };
+
+  const handleRemoveClick = () => {
+    handleRemove(id);
+  };
+
   return (
     <div className={classes.todoItemViewContainer}>
       <div>
@@ -27,7 +38,7 @@ function TodoItemView({
             <GreenCheckbox
               checked={done}
               name="checkedG"
-              onChange={() => handleTodoCheckedChange(id)}
+              onChange={handleCheckboxChange}
             />
           }
           label={
@@ -45,7 +56,7 @@ function TodoItemView({
           <IconButton
             aria-label="edit an item"
             color="primary"
-            onClick={handleEdit}
+            onClick={handleEditClick}
           >
             <EditIcon />
           </IconButton>
@@ -54,7 +65,7 @@ function TodoItemView({
           <IconButton
             aria-label="delete an item"
             color="secondary"
-            onClick={() => handleRemove(id)}
+            onClick={handleRemoveClick}
           >
             <DeleteIcon />
           </IconButton>

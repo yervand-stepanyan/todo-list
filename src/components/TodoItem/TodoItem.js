@@ -1,50 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import TodoItemEdit from '../TodoItemEdit';
-import TodoItemView from '../TodoItemView';
+import TodoItemEdit from './TodoItemEdit';
+import TodoItemView from './TodoItemView';
 import { useStore } from '../../store/use-store';
 
 function TodoItem({ item }) {
   const { description, done, id } = item;
   const [isEdit, setIsEdit] = useState(false);
-  const [value, setValue] = useState('');
   const {
     handleTodoCheckedChange,
     handleTodoEdit,
     handleTodoRemove,
   } = useStore();
 
-  useEffect(() => {
-    setValue(description);
-  }, [isEdit]);
-
-  const handleEdit = () => {
-    setIsEdit(true);
-  };
-
-  const handleInputChange = event => {
-    setValue(event.target.value);
-  };
-
-  const handleSubmit = itemId => {
-    if (value) {
-      handleTodoEdit({ description: value, id: itemId });
-
-      setIsEdit(false);
-    }
-  };
-
-  const handleSubmitOnEnter = event => {
-    if (event.key === 'Enter') {
-      handleSubmit(id);
-    }
-  };
-
-  const handleSubmitOnBlur = event => {
-    event.preventDefault();
-
-    handleSubmit(id);
+  const handleEdit = edit => {
+    setIsEdit(edit);
   };
 
   const handleRemove = itemId => {
@@ -55,13 +26,10 @@ function TodoItem({ item }) {
     <div>
       {isEdit ? (
         <TodoItemEdit
-          handleInputChange={handleInputChange}
-          handleSubmitOnEnter={handleSubmitOnEnter}
-          handleSubmitOnBlur={handleSubmitOnBlur}
-          handleSubmit={handleSubmit}
+          description={description}
+          handleEdit={handleEdit}
+          handleTodoEdit={handleTodoEdit}
           id={id}
-          isError={!value}
-          value={value}
         />
       ) : (
         <TodoItemView
