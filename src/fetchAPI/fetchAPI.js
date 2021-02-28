@@ -18,10 +18,10 @@ async function request({ method, body, id }) {
 }
 
 const API = {
-  deleteTodo: id => request({ method: 'DELETE', id }),
+  removeTodo: id => request({ method: 'DELETE', id }),
   getTodos: () => request({ method: 'GET' }),
-  postTodo: body => request({ method: 'POST', body }),
-  updateTodo: body => request({ method: 'POST', body }),
+  addTodo: body => request({ method: 'POST', body }),
+  updateTodo: (body, id) => request({ method: 'POST', body, id }),
 };
 
 export default API;

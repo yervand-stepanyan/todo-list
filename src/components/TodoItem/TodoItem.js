@@ -12,6 +12,8 @@ function TodoItem({ item }) {
     handleTodoCheckedChange,
     handleTodoEdit,
     handleTodoRemove,
+    iconToLoad,
+    isRemoveIconLoading,
   } = useStore();
 
   const handleEdit = edit => {
@@ -38,7 +40,9 @@ function TodoItem({ item }) {
           handleEdit={handleEdit}
           handleRemove={handleRemove}
           handleTodoCheckedChange={handleTodoCheckedChange}
+          iconToLoad={iconToLoad}
           id={id}
+          isRemoveIconLoading={isRemoveIconLoading}
         />
       )}
     </div>

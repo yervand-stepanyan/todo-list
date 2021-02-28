@@ -16,4 +16,7 @@ export const useStyles = makeStyles(theme => ({
   iconsContainer: {
     display: 'flex',
   },
+  removeIconWrapper: {
+    position: 'relative',
+  },
 }));

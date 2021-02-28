@@ -25,7 +25,9 @@ function Todolist() {
   }, [selectedFilter, todolist]);
 
   return (
-    <div className={classes.todolistContainer}>
+    <div
+      className={`${todolistToShow.length ? classes.todolistContainer : ''}`}
+    >
       {todolistToShow.map(item => (
         <TodoItem item={item} key={item.id} />
       ))}

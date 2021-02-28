@@ -13,6 +13,9 @@ export const useStyles = makeStyles({
       'border-bottom-right-radius': 0,
     },
   },
+  buttonWrapper: {
+    position: 'relative',
+  },
   button: {
     'border-top-left-radius': 0,
     'border-bottom-left-radius': 0,

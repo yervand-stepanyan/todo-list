@@ -7,6 +7,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 import GreenCheckbox from '../GreenCheckbox';
+import Loader from '../../Loader';
+import { LOADER } from '../../../globals/constants';
 import { useStyles } from './TodoItemView.style';
 
 function TodoItemView({
@@ -15,13 +17,16 @@ function TodoItemView({
   handleEdit,
   handleTodoCheckedChange,
   handleRemove,
+  iconToLoad,
   id,
+  isRemoveIconLoading,
 }) {
   const classes = useStyles();
 
   const handleCheckboxChange = () => {
     handleTodoCheckedChange(id);
   };
+
   const handleEditClick = () => {
     handleEdit(true);
   };
@@ -61,14 +66,18 @@ function TodoItemView({
             <EditIcon />
           </IconButton>
         </div>
-        <div>
+        <div className={classes.removeIconWrapper}>
           <IconButton
             aria-label="delete an item"
             color="secondary"
+            disabled={iconToLoad === id && isRemoveIconLoading}
             onClick={handleRemoveClick}
           >
             <DeleteIcon />
           </IconButton>
+          {iconToLoad === id && isRemoveIconLoading && (
+            <Loader type={LOADER.icon.type} />
+          )}
         </div>
       </div>
     </div>
@@ -81,7 +90,9 @@ TodoItemView.propTypes = {
   handleEdit: PropTypes.func.isRequired,
   handleTodoCheckedChange: PropTypes.func.isRequired,
   handleRemove: PropTypes.func.isRequired,
+  iconToLoad: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  isRemoveIconLoading: PropTypes.bool.isRequired,
 };
 
 export default TodoItemView;

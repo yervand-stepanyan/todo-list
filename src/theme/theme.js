@@ -19,6 +19,7 @@ export const theme = createMuiTheme({
     xSmall: `${MAIN_SPACING_VALUE / 4}px`,
     small: `${MAIN_SPACING_VALUE / 2}px`,
     base: `${MAIN_SPACING_VALUE}px`,
+    larger: `${MAIN_SPACING_VALUE * 1.5}px`,
     large: `${MAIN_SPACING_VALUE * 2}px`,
     editTextFieldPaddingRight: `${EDIT_PADDING_VALUE}px`,
   },
