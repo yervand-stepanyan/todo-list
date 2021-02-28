@@ -26,4 +26,21 @@ export const LABEL = {
     single: 'item left',
   },
 };
+export const LOADER = {
+  button: {
+    size: 24,
+    thickness: 8,
+    type: 'button',
+  },
+  icon: {
+    size: 24,
+    thickness: 8,
+    type: 'icon',
+  },
+  page: {
+    size: 60,
+    thickness: 4,
+    type: 'page',
+  },
+};
 export const TITLE = 'Todo List';
